@@ -12,7 +12,7 @@ struct Block {
 struct Header {
     parent_hash: String,
     block_hash: String,
-    nonce: i32,
+    nonce: i64,
     time_stamp: i64,
 }
 
@@ -21,7 +21,13 @@ struct Miner {
 }
 
 impl Miner {
-    fn pow(&self) -> (String, i64, i64) {
+    fn pow(&mut self) {
+        let result = self.exec();
+        let block = self.create_block(result);
+        self.block_chain.push(block);
+    }
+
+    fn exec(&self) -> (String, i64, i64) {
         let target = "00001000111111111111111111111111111111111111111111111111111111".to_string();
         let mut hash = "11111111111111111111111111111111111111111111111111111111111111".to_string();
         let mut nonce: i64 = 0;
@@ -33,7 +39,22 @@ impl Miner {
             hash = self.calc(nonce, time_stamp);
         }
 
-        (hash, nonce, time_stamp)
+        (format!("0x{}", hash), nonce, time_stamp)
+    }
+
+    fn create_block(&self, pow_result: (String, i64, i64)) -> Block {
+        let parent_block = &self.block_chain.last().unwrap();
+        let header = Header { parent_hash: parent_block.header.block_hash.to_string(),
+                    block_hash: pow_result.0,
+                    nonce: pow_result.1,
+                    time_stamp: pow_result.2,
+                    };
+        // TODO: Block Sizeの計算
+        Block { height: parent_block.height + 1, size: 0, header: header, }
+    }
+
+    fn add_block(&self) {
+        // &self.block_chain.push();
     }
 
     fn calc(&self, nonce: i64, time_stamp: i64) -> String {
@@ -57,7 +78,7 @@ fn main() {
 
     let genesis_block = Block { height: 0, size: 0, header: header, };
 
-    let miner = Miner { block_chain: vec![genesis_block] };
+    let mut miner = Miner { block_chain: vec![genesis_block] };
 
     miner.pow();
 }
