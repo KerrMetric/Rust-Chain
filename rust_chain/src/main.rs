@@ -53,10 +53,6 @@ impl Miner {
         Block { height: parent_block.height + 1, size: 0, header: header, }
     }
 
-    fn add_block(&self) {
-        // &self.block_chain.push();
-    }
-
     fn calc(&self, nonce: i64, time_stamp: i64) -> String {
         let parent_hash = &self.block_chain.last().unwrap().header.parent_hash;
         let raw_data = format!("{}{}{}", parent_hash, nonce.to_string(), time_stamp.to_string());
