@@ -1,4 +1,7 @@
+extern crate crypto;
 use chrono::Local;
+use crypto::sha2::Sha256;
+use crypto::digest::Digest;
 
 struct Block {
     height: i32,
@@ -15,6 +18,23 @@ struct Header {
 
 struct Miner {
     block_chain: Vec<Block>,
+}
+
+impl Miner {
+    fn pow(&self) {
+        let target = "00001000111111111111111111111111111111111111111111111111111111";
+        let mut hash = "";
+        let mut nonce: i64 = 0;
+        let time_stamp = Local::now().timestamp();
+    }
+
+    fn calc(&self, nonce: i64, time_stamp: i64) -> String {
+        let parent_hash = &self.block_chain.last().unwrap().header.parent_hash;
+        let raw_data = format!("{}{}{}", parent_hash, nonce.to_string(), time_stamp.to_string());
+        let mut hasher = Sha256::new();
+        hasher.input_str(&raw_data);
+        hasher.result_str()
+    }
 }
 
 fn main() {
