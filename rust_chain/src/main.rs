@@ -13,6 +13,10 @@ struct Header {
     time_stamp: i64,
 }
 
+struct Miner {
+    block_chain: Vec<Block>,
+}
+
 fn main() {
     println!("Start Rust Chain!");
 
