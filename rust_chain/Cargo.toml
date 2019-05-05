@@ -5,4 +5,5 @@ authors = ["Takumi Karibe <takumi.k.5610@gmail.com>", "shiki <shiki.tak@gmail.co
 edition = "2018"
 
 [dependencies]
-chrono = "0.4"
+chrono = ""
+rust-crypto = ""
