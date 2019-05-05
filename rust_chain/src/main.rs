@@ -28,4 +28,6 @@ fn main() {
                         };
 
     let genesis_block = Block { height: 0, size: 0, header: header, };
+
+    let miner = Miner { block_chain: vec![genesis_block] };
 }
