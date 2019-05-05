@@ -21,11 +21,19 @@ struct Miner {
 }
 
 impl Miner {
-    fn pow(&self) {
-        let target = "00001000111111111111111111111111111111111111111111111111111111";
-        let mut hash = "";
+    fn pow(&self) -> (String, i64, i64) {
+        let target = "00001000111111111111111111111111111111111111111111111111111111".to_string();
+        let mut hash = "11111111111111111111111111111111111111111111111111111111111111".to_string();
         let mut nonce: i64 = 0;
-        let time_stamp = Local::now().timestamp();
+        let mut time_stamp = Local::now().timestamp();
+
+        while hash > target {
+            nonce += 1;
+            time_stamp = Local::now().timestamp();
+            hash = self.calc(nonce, time_stamp);
+        }
+
+        (hash, nonce, time_stamp)
     }
 
     fn calc(&self, nonce: i64, time_stamp: i64) -> String {
@@ -50,4 +58,6 @@ fn main() {
     let genesis_block = Block { height: 0, size: 0, header: header, };
 
     let miner = Miner { block_chain: vec![genesis_block] };
+
+    miner.pow();
 }
