@@ -1,3 +1,4 @@
+pub mod account;
 pub mod miner;
 pub mod transaction;
 mod block;
