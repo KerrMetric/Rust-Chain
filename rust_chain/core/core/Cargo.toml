@@ -1,8 +1,9 @@
 [package]
-name = "rust_chain"
+name = "core"
 version = "0.1.0"
 authors = ["Takumi Karibe <takumi.k.5610@gmail.com>", "shiki <shiki.tak@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-core = { package = "core", path = "./core/core/" }
+chrono = ""
+rust-crypto = ""
