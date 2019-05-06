@@ -1,9 +1,7 @@
 extern crate rand;
-extern crate crypto;
+extern crate utils;
 
 use rand::Rng;
-use crypto::sha2::Sha256;
-use crypto::digest::Digest;
 
 #[derive(Debug)]
 pub struct Transaction {
@@ -16,20 +14,15 @@ pub struct Transaction {
 impl Transaction {
     pub fn new() -> Transaction {
         let (to, from) = (rand::thread_rng().gen_range(1, 101), rand::thread_rng().gen_range(1, 101));
-        let to_address = Transaction::to_hash(format!("{}", to));
-        let from_address = Transaction::to_hash(format!("{}", from));
+        let to_address = utils::hash::generate(format!("{}", to));
+        let to_address = utils::hash::generate(format!("{}", to));
+        let from_address = utils::hash::generate(format!("{}", from));
         let value = rand::thread_rng().gen_range(100, 10001);
-        let hash = Transaction::to_hash(format!("{}{}{}", to_address, from_address, value));
+        let hash = utils::hash::generate(format!("{}{}{}", to_address, from_address, value));
 
         Transaction { hash: hash,
                     to_address: to_address,
                     from_address: from_address,
                     value: value }
-    }
-
-    fn to_hash(target: String) -> String {
-        let mut hasher = Sha256::new();
-        hasher.input_str(&target);
-        format!("0x{}", hasher.result_str())
     }
 }

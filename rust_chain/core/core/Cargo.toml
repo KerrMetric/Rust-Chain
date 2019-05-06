@@ -8,3 +8,5 @@ edition = "2018"
 chrono = ""
 rust-crypto = ""
 rand = ""
+
+utils = { package = "utils", path = "../../utils/" }
