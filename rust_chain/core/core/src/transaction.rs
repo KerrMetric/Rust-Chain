@@ -7,6 +7,7 @@ use crypto::digest::Digest;
 
 #[derive(Debug)]
 pub struct Transaction {
+    pub hash: String,
     pub to_address: String,
     pub from_address: String,
     pub value: i64,
@@ -15,14 +16,20 @@ pub struct Transaction {
 impl Transaction {
     pub fn new() -> Transaction {
         let (to, from) = (rand::thread_rng().gen_range(1, 101), rand::thread_rng().gen_range(1, 101));
-        let (to_data, from_data) = (format!("{}", to), format!("{}", from));
-        let mut to_hasher = Sha256::new();
-        let mut from_hasher = Sha256::new();
-        to_hasher.input_str(&to_data);
-        from_hasher.input_str(&from_data);
+        let to_address = Transaction::to_hash(format!("{}", to));
+        let from_address = Transaction::to_hash(format!("{}", from));
+        let value = rand::thread_rng().gen_range(100, 10001);
+        let hash = Transaction::to_hash(format!("{}{}{}", to_address, from_address, value));
 
-        Transaction { to_address: format!("0x{}", to_hasher.result_str()),
-                    from_address: format!("0x{}", from_hasher.result_str()),
-                    value: rand::thread_rng().gen_range(100, 10001) }
+        Transaction { hash: hash,
+                    to_address: to_address,
+                    from_address: from_address,
+                    value: value }
+    }
+
+    fn to_hash(target: String) -> String {
+        let mut hasher = Sha256::new();
+        hasher.input_str(&target);
+        format!("0x{}", hasher.result_str())
     }
 }
