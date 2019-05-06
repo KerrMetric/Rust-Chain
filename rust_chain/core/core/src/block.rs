@@ -1,7 +1,7 @@
 use crate::transaction::Transaction;
 
 #[derive(Debug)]
-pub(crate) struct Block {
+pub struct Block {
     pub(crate) height: i32,
     pub(crate) size: i64,
     pub(crate) header: Header,
