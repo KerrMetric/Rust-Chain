@@ -1,3 +1,5 @@
+use crate::transaction::Transaction;
+
 #[derive(Debug)]
 pub(crate) struct Block {
     pub(crate) height: i32,
@@ -10,5 +12,6 @@ pub(crate) struct Header {
     pub(crate) parent_hash: String,
     pub(crate) block_hash: String,
     pub(crate) nonce: i64,
+    pub(crate) transactions: Vec<Transaction>,
     pub(crate) time_stamp: i64,
 }

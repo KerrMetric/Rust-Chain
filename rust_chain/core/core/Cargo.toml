@@ -7,3 +7,4 @@ edition = "2018"
 [dependencies]
 chrono = ""
 rust-crypto = ""
+rand = ""

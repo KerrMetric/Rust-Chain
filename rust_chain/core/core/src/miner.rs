@@ -6,6 +6,7 @@ use chrono::Local;
 
 use crate::block::Block;
 use crate::block::Header;
+use crate::transaction::Transaction;
 
 #[derive(Debug)]
 pub struct Miner {
@@ -17,16 +18,21 @@ impl Miner {
         Miner { block_chain: vec![] }
     }
 
-    pub fn pow(&mut self) {
+    pub fn print(&self) {
+        for block in &self.block_chain {
+            // FIXME: JSONで出力
+            println!("{:?}", block);
+        }
+    }
+
+    pub fn pow(&mut self, transactions: Vec<Transaction>) {
         let (target_height, parent_hash) = match self.block_chain.last() {
             Some(parent_block) => (parent_block.height + 1, parent_block.header.block_hash.to_string()),
             None => (0, "0x0000000000000000000000000000000000000000".to_string()),
         };
         let result = self.exec(&parent_hash);
-        let block = self.create_block(target_height, &parent_hash, result);
+        let block = self.create_block(target_height, &parent_hash, result, transactions);
         self.block_chain.push(block);
-
-        println!("{:?}", self.block_chain);
     }
 
     fn exec(&self, parent_hash: &String) -> (String, i64, i64) {
@@ -51,10 +57,15 @@ impl Miner {
         hasher.result_str()
     }
 
-    fn create_block(&self, target_height: i32, parent_hash: &String, pow_result: (String, i64, i64)) -> Block {
+    fn create_block(&self,
+                    target_height: i32,
+                    parent_hash: &String,
+                    pow_result: (String, i64, i64),
+                    transactions: Vec<Transaction>) -> Block {
         let header = Header { parent_hash: parent_hash.to_string(),
                     block_hash: pow_result.0,
                     nonce: pow_result.1,
+                    transactions: transactions,
                     time_stamp: pow_result.2,
                     };
         // TODO: Block Sizeの計算

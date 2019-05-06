@@ -1,4 +1,5 @@
 pub mod miner;
+pub mod transaction;
 mod block;
 
 #[cfg(test)]
