@@ -1,4 +1,3 @@
-extern crate crypto;
 use crypto::sha2::Sha256;
 use crypto::digest::Digest;
 
