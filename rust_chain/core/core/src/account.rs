@@ -1,6 +1,5 @@
-extern crate utils;
-extern crate rand;
 use rand::Rng;
+use utils;
 
 pub struct Account {
     pub address: String,

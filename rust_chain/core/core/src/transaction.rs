@@ -1,7 +1,5 @@
-extern crate rand;
-extern crate utils;
-
 use rand::Rng;
+use utils;
 
 #[derive(Debug)]
 pub struct Transaction {

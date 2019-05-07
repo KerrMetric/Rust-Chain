@@ -1,4 +1,3 @@
-extern crate core;
 use core::node::Node;
 use core::transaction::Transaction;
 use core::miner::Miner;
