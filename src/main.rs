@@ -1,6 +1,5 @@
 use rand::Rng;
 use nodes::node::Node;
-use accounts::account::Account;
 
 use nodes::miner::Miner;
 use utils::hash;
@@ -9,8 +8,7 @@ fn main() {
     println!("Start Rust Chain!");
 
     let mut node = Node::new(vec!());
-    let account = Account::new();
-    node.accounts.push(account);
+    node.create_account();
 
     for i in 1..=10 {
         let account = node.accounts.first().unwrap();

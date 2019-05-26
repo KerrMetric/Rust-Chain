@@ -13,6 +13,10 @@ impl Node {
         Self { accounts: vec![], transactions: vec![], block_chain: block_chain }
     }
 
+    pub fn create_account(&mut self) {
+        self.accounts.push(Account::new());
+    }
+
     pub fn print(&self) {
         for block in &self.block_chain {
             // FIXME: JSONで出力
