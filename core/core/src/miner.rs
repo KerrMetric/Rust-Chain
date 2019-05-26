@@ -25,7 +25,7 @@ impl Miner for Node {
 }
 
 fn pow(parent_hash: &String) -> (String, i64, i64) {
-    let target = "00001000111111111111111111111111111111111111111111111111111111".to_string();
+    let target = "00011000111111111111111111111111111111111111111111111111111111".to_string();
     let mut hash = "11111111111111111111111111111111111111111111111111111111111111".to_string();
     let mut nonce: i64 = 0;
     let mut time_stamp = Local::now().timestamp();
