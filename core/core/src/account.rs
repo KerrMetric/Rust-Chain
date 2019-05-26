@@ -1,6 +1,8 @@
 use rand::Rng;
 use utils;
 
+use crate::transaction::Transaction;
+
 pub struct Account {
     pub address: String,
     pub balance: i64,
@@ -13,5 +15,9 @@ impl Account {
             balance: 0,
             miner: false
         }
+    }
+
+    fn sendTransaction(&self, to_address: String, value: i64) -> Transaction {
+        return Transaction::new(self.address.clone(), to_address, value)
     }
 }
