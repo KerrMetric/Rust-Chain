@@ -1,11 +1,10 @@
 [package]
-name = "core"
+name = "accounts"
 version = "0.1.0"
-authors = ["Takumi Karibe <takumi.k.5610@gmail.com>", "shiki <shiki.tak@gmail.com>"]
+authors = ["Takumi Karibe <takumi.k.5610@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-chrono = ""
 rand = ""
-
+core = { package = "core", path = "../core/" }
 utils = { package = "utils", path = "../utils/" }

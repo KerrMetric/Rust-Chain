@@ -1,5 +1,5 @@
-use crate::account::Account;
-use crate::block::Block;
+use accounts::account::Account;
+use core::block::Block;
 
 pub struct Node {
     pub accounts: Vec<Account>,

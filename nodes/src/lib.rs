@@ -1,5 +1,5 @@
-pub mod transaction;
-pub mod block;
+pub mod node;
+pub mod miner;
 
 #[cfg(test)]
 mod tests {

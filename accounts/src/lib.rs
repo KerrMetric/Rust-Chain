@@ -1,5 +1,4 @@
-pub mod transaction;
-pub mod block;
+pub mod account;
 
 #[cfg(test)]
 mod tests {

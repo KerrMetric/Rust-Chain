@@ -1,7 +1,6 @@
 use rand::Rng;
+use core::transaction::Transaction;
 use utils;
-
-use crate::transaction::Transaction;
 
 pub struct Account {
     pub address: String,

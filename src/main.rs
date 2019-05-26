@@ -1,6 +1,6 @@
-use core::node::Node;
+use nodes::node::Node;
 use core::transaction::Transaction;
-use core::miner::Miner;
+use nodes::miner::Miner;
 
 fn main() {
     println!("Start Rust Chain!");
