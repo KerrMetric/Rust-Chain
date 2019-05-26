@@ -5,4 +5,4 @@ authors = ["Takumi Karibe <takumi.k.5610@gmail.com>", "shiki <shiki.tak@gmail.co
 edition = "2018"
 
 [dependencies]
-core = { package = "core", path = "./core/core/" }
+core = { package = "core", path = "./core/" }

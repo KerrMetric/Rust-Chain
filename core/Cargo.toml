@@ -9,4 +9,4 @@ chrono = ""
 rust-crypto = ""
 rand = ""
 
-utils = { package = "utils", path = "../../utils/" }
+utils = { package = "utils", path = "../utils/" }
