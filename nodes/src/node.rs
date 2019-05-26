@@ -14,7 +14,8 @@ impl Node {
     }
 
     pub fn create_account(&mut self) {
-        self.accounts.push(Account::new());
+        let account = Account::new();
+        self.accounts.push(account);
     }
 
     pub fn print(&self) {
