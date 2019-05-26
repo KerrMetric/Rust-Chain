@@ -129,8 +129,10 @@ dependencies = [
 name = "rust_chain"
 version = "0.1.0"
 dependencies = [
+ "accounts 0.1.0",
  "core 0.1.0",
  "nodes 0.1.0",
+ "utils 0.1.0",
 ]
 
 [[package]]

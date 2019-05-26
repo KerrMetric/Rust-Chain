@@ -7,3 +7,5 @@ edition = "2018"
 [dependencies]
 core = { package = "core", path = "./core/" }
 nodes = { package = "nodes", path = "./nodes/" }
+accounts = { package = "accounts", path = "./accounts/" }
+utils = { package = "utils", path = "./utils/" }

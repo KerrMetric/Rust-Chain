@@ -1,7 +1,7 @@
 use rand::Rng;
 use utils;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Transaction {
     pub hash: String,
     pub from_address: String,

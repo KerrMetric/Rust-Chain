@@ -7,17 +7,17 @@ use utils::hash;
 use crate::node::Node;
 
 pub trait Miner {
-    fn mining(&mut self, transactions: Vec<Transaction>);
+    fn mining(&mut self);
 }
 
 impl Miner for Node {
-    fn mining(&mut self, transactions: Vec<Transaction>) {
+    fn mining(&mut self) {
         let (target_height, parent_hash) = match self.block_chain.last() {
             Some(parent_block) => (parent_block.height + 1, parent_block.header.block_hash.to_string()),
             None => (0, "0x0000000000000000000000000000000000000000".to_string()),
         };
         let result = pow(&parent_hash);
-        let block = create_block(target_height, &parent_hash, result, transactions);
+        let block = create_block(target_height, &parent_hash, result, self.transactions.clone());
         self.block_chain.push(block);
     }
 }
