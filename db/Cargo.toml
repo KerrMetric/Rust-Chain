@@ -1,0 +1,10 @@
+[package]
+name = "db"
+version = "0.1.0"
+authors = ["Takumi Karibe <takumi.k.5610@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rocksdb = ""
+
+accounts = { package = "accounts", path = "../accounts/" }

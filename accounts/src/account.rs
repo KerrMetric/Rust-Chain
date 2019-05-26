@@ -2,6 +2,7 @@ use rand::Rng;
 use core::transaction::Transaction;
 use utils;
 
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Account {
     pub address: String,
     pub balance: i64,

@@ -6,5 +6,8 @@ edition = "2018"
 
 [dependencies]
 rand = ""
+serde = ""
+serde_derive = ""
+serde_json = ""
 core = { package = "core", path = "../core/" }
 utils = { package = "utils", path = "../utils/" }
