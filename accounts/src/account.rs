@@ -16,7 +16,7 @@ impl Account {
         }
     }
 
-    pub fn send_transaction(&self, to_address: String, value: i64) -> Transaction {
-        return Transaction::new(self.address.clone(), to_address, value)
+    pub fn send_transaction(&self, to_address: String, value: i64, fee: i64) -> Transaction {
+        return Transaction::new(self.address.clone(), to_address, value, fee)
     }
 }

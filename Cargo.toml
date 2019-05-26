@@ -5,6 +5,8 @@ authors = ["Takumi Karibe <takumi.k.5610@gmail.com>", "shiki <shiki.tak@gmail.co
 edition = "2018"
 
 [dependencies]
+rand = ""
+
 core = { package = "core", path = "./core/" }
 nodes = { package = "nodes", path = "./nodes/" }
 accounts = { package = "accounts", path = "./accounts/" }

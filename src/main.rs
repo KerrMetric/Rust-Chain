@@ -1,3 +1,4 @@
+use rand::Rng;
 use nodes::node::Node;
 use accounts::account::Account;
 
@@ -12,7 +13,10 @@ fn main() {
     node.accounts.push(account);
 
     for i in 1..=10 {
-        let transaction = node.accounts.first().unwrap().send_transaction(hash::generate(i.to_string()), i * 1000);
+        let account = node.accounts.first().unwrap();
+        let address = hash::generate(i.to_string());
+        let fee = rand::thread_rng().gen_range(1, i * 10) % 100;
+        let transaction = account.send_transaction(address, i * 1000, fee);
         node.transactions.push(transaction);
     }
 
