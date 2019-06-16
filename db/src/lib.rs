@@ -1,4 +1,12 @@
-pub mod rocksdb;
+pub mod account_db;
+
+extern crate serde;
+#[macro_use]
+extern crate serde_derive;
+extern crate serde_json;
+
+#[macro_use]
+extern crate lazy_static;
 
 #[cfg(test)]
 mod tests {

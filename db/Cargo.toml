@@ -6,5 +6,9 @@ edition = "2018"
 
 [dependencies]
 rocksdb = ""
+serde = ""
+serde_derive = ""
+serde_json = ""
+lazy_static = ""
 
 accounts = { package = "accounts", path = "../accounts/" }
