@@ -17,7 +17,11 @@ impl Account {
         }
     }
 
-    pub fn send_transaction(&self, to_address: String, value: i64, fee: i64) -> Transaction {
-        return Transaction::new(self.address.clone(), to_address, value, fee)
+    // TODO: 戻り値をOptionからResultにする
+    pub fn send_transaction(&self, to_account: &Account, value: i64, fee: i64) -> Option<Transaction> {
+        if self.balance < value + fee {
+            return None;
+        }
+        Some(Transaction::new(self.address.clone(), to_account.address.clone(), value, fee))
     }
 }

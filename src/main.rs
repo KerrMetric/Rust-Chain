@@ -1,4 +1,3 @@
-use utils::hash;
 use db;
 use nodes::miner::Miner;
 use nodes::node::Node;
@@ -8,34 +7,23 @@ fn main() {
     println!("Start Rust Chain!");
 
     let mut node = Node::new(vec![]);
-    node.create_account();
+
+    let from_account = db::account_db::get(
+        &"0x5214de409e4f511b6eed7b48ec427969e1bb57f6a766c19972b43236929c56b6".to_string(),
+    )
+    .unwrap();
+    let to_account = db::account_db::get(
+        &"0x3309e3883ea9bcc8b6a97f6358d26db109d7f9f8a52a5b1ec6664d9414a904de".to_string(),
+    )
+    .unwrap();
 
     for i in 1..=10 {
-        let account = node.accounts.first().unwrap();
-        let address = hash::generate(i.to_string());
         let fee = rand::thread_rng().gen_range(1, i * 10) % 100;
-        let transaction = account.send_transaction(address, i * 1000, fee);
-        node.transactions.push(transaction);
+        match from_account.send_transaction(&to_account, i * 100, fee) {
+            Some(transaction) => node.transactions.push(transaction),
+            None => continue,
+        };
     }
-
-    let account = node.accounts.first().unwrap();
-    let address = &account.address;
-    match db::account_db::set(account) {
-        Ok(_) => println!("db set success"),
-        Err(e) => println!("Nooooooo: {}", e),
-    };
-
-    println!("set account: {}", address);
-
-    match db::account_db::get(&address) {
-        Some(v) => println!("db got address: {}", v.address),
-        None => println!("db got address failure"),
-    };
-
-    match db::account_db::delete(&address) {
-        Ok(_) => println!("db delete success"),
-        Err(_) => println!("db delete failure"),
-    };
 
     for _ in 1..=3 {
         // let transactions = vec!(Transaction::dummy_new());
