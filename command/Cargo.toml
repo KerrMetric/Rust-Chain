@@ -1,5 +1,5 @@
 [package]
-name = "simulator"
+name = "command"
 version = "0.1.0"
 authors = ["Takumi Karibe <takumi.k.5610@gmail.com>"]
 edition = "2018"
@@ -7,8 +7,7 @@ edition = "2018"
 [dependencies]
 rand = ""
 
-core = { package = "core", path = "../core/" }
 nodes = { package = "nodes", path = "../nodes/" }
-accounts = { package = "accounts", path = "../accounts/" }
 db = { package = "db", path = "../db/" }
 utils = { package = "utils", path = "../utils/" }
+rust_chain_error = { package = "error", path = "../error/" }

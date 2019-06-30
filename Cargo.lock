@@ -168,6 +168,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "command"
+version = "0.1.0"
+dependencies = [
+ "db 0.1.0",
+ "error 0.1.0",
+ "nodes 0.1.0",
+ "rand 0.3.23 (registry+https://github.com/rust-lang/crates.io-index)",
+ "utils 0.1.0",
+]
+
+[[package]]
 name = "core"
 version = "0.1.0"
 dependencies = [
@@ -241,6 +252,10 @@ dependencies = [
  "regex 1.1.7 (registry+https://github.com/rust-lang/crates.io-index)",
  "termcolor 1.0.5 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "error"
+version = "0.1.0"
 
 [[package]]
 name = "failure"
@@ -592,7 +607,7 @@ dependencies = [
 name = "rust_chain"
 version = "0.1.0"
 dependencies = [
- "simulator 0.1.0",
+ "command 0.1.0",
 ]
 
 [[package]]
@@ -638,18 +653,6 @@ dependencies = [
  "itoa 0.4.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "ryu 0.2.8 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde 1.0.94 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "simulator"
-version = "0.1.0"
-dependencies = [
- "accounts 0.1.0",
- "core 0.1.0",
- "db 0.1.0",
- "nodes 0.1.0",
- "rand 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "utils 0.1.0",
 ]
 
 [[package]]
