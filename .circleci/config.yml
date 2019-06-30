@@ -9,8 +9,8 @@ jobs:
           name: apt update
           command: sudo apt update
       - run:
-          name: install clang
-          command: sudo apt install clang
+          name: setup libraries
+          command: sudo apt-get install clang libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev librocksdb-sys
       - run:
           name: rustup version
           command: rustup --version
