@@ -20,20 +20,52 @@ impl Miner for Node {
             ),
             None => (0, "0x0000000000000000000000000000000000000000".to_string()),
         };
+
         let mut transactions = std::mem::replace(&mut self.transactions, vec![]);
 
-        let mut hash_sead = String::from("");
-        for transaction in transactions.iter() {
-            hash_sead = format!("{}{}", hash_sead, transaction.hash);
-        }
-        let merkle_root = hash::generate(hash_sead);
-        let result = pow(&parent_hash, &merkle_root);
+        let merkle_tree = make_merkle_tree(&transactions);
+        let result = pow(&parent_hash, &merkle_tree.first().unwrap());
+
         for transaction in transactions.iter_mut() {
             transaction.pending = false;
         }
+
         let block = create_block(target_height, &parent_hash, result, transactions);
         self.block_chain.push(block);
     }
+}
+
+fn make_merkle_tree(transactions: &Vec<Transaction>) -> Vec<String> {
+    if transactions.len() == 0 {
+        return vec![];
+    }
+
+    let mut hash_list: Vec<String> = transactions
+        .iter()
+        .map(|t| t.hash.clone())
+        .collect::<Vec<String>>();
+
+    loop {
+        let len = hash_list.len();
+        if (len & len - 1) == 0 {
+            break;
+        } else {
+            let last = hash_list.last().unwrap().clone();
+            hash_list.push(last);
+        }
+    }
+
+    hash_list.reverse();
+
+    let mut index = 0;
+    while index < hash_list.len() - 1 {
+        let hash = hash::generate(format!("{}{}", hash_list[index], hash_list[index + 1]));
+        hash_list.push(hash);
+        index += 2;
+    }
+
+    hash_list.reverse();
+    hash_list
 }
 
 fn pow(parent_hash: &String, merkle_root: &String) -> (String, i64, i64) {
