@@ -17,17 +17,17 @@ fn main() {
     )
     .unwrap();
 
-    for i in 1..=10 {
+    for i in 1..=100 {
         let fee = rand::thread_rng().gen_range(1, i * 10) % 100;
         match from_account.send_transaction(&to_account, i * 100, fee) {
-            Some(transaction) => node.transactions.push(transaction),
+            Some(transaction) => node.push_transaction(transaction),
             None => continue,
         };
+
+        if node.transactions.len() >= 10 {
+            node.mining();
+        }
     }
 
-    for _ in 1..=3 {
-        // let transactions = vec!(Transaction::dummy_new());
-        node.mining();
-    }
     node.print();
 }

@@ -1,7 +1,7 @@
 use accounts::account::Account;
-use core::transaction::Transaction;
-use core::block::Block;
 
+use core::block::Block;
+use core::transaction::Transaction;
 pub struct Node {
     pub accounts: Vec<Account>,
     pub transactions: Vec<Transaction>,
@@ -10,12 +10,21 @@ pub struct Node {
 
 impl Node {
     pub fn new(block_chain: Vec<Block>) -> Self {
-        Self { accounts: vec![], transactions: vec![], block_chain: block_chain }
+        Self {
+            accounts: vec![],
+            transactions: vec![],
+            block_chain: block_chain,
+        }
     }
 
     pub fn create_account(&mut self) {
         let account = Account::new();
         self.accounts.push(account);
+    }
+
+    pub fn push_transaction(&mut self, transaction: Transaction) {
+        self.transactions.push(transaction);
+        self.transactions.sort_by_key(|t| t.fee);
     }
 
     pub fn print(&self) {

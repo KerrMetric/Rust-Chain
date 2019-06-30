@@ -20,16 +20,13 @@ impl Miner for Node {
             ),
             None => (0, "0x0000000000000000000000000000000000000000".to_string()),
         };
-        self.transactions.sort_by_key(|t| t.fee);
-        let mut transactions: Vec<Transaction> = vec![];
-        for _ in 1..=3 {
-            let transaction = self.transactions.pop().unwrap();
-            transactions.push(transaction);
+        let mut transactions = std::mem::replace(&mut self.transactions, vec![]);
+
+        let mut hash_sead = String::from("");
+        for transaction in transactions.iter() {
+            hash_sead = format!("{}{}", hash_sead, transaction.hash);
         }
-        let merkle_root = hash::generate(format!(
-            "{}{}{}",
-            transactions[0].hash, transactions[1].hash, transactions[2].hash
-        ));
+        let merkle_root = hash::generate(hash_sead);
         let result = pow(&parent_hash, &merkle_root);
         for transaction in transactions.iter_mut() {
             transaction.pending = false;
