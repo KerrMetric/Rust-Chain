@@ -6,6 +6,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: apt update
+          command: sudo apt update
+      - run:
+          name: install clang
+          command: sudo apt install clang
+      - run:
           name: rustup version
           command: rustup --version
       - run:
