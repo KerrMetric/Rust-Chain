@@ -11,3 +11,4 @@ nodes = { package = "nodes", path = "../nodes/" }
 db = { package = "db", path = "../db/" }
 utils = { package = "utils", path = "../utils/" }
 rust_chain_error = { package = "error", path = "../error/" }
+accounts = { package = "accounts", path = "../accounts/" }

@@ -171,6 +171,7 @@ dependencies = [
 name = "command"
 version = "0.1.0"
 dependencies = [
+ "accounts 0.1.0",
  "db 0.1.0",
  "error 0.1.0",
  "nodes 0.1.0",

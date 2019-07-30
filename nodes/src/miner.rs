@@ -26,9 +26,9 @@ impl Miner for Node {
         let merkle_tree = make_merkle_tree(&transactions);
         let result = pow(&parent_hash, &merkle_tree.first().unwrap());
 
-        for transaction in transactions.iter_mut() {
-            transaction.pending = false;
-        }
+        transactions
+            .iter_mut()
+            .for_each(|transaction| transaction.pending = false);
 
         let block = create_block(target_height, &parent_hash, result, transactions);
         self.block_chain.push(block);
@@ -71,7 +71,7 @@ fn make_merkle_tree(transactions: &Vec<Transaction>) -> Vec<String> {
 fn pow(parent_hash: &String, merkle_root: &String) -> (String, i64, i64) {
     let target = "01000100111111111111111111111111111111111111111111111111111111".to_string();
     let mut hash = "11111111111111111111111111111111111111111111111111111111111111".to_string();
-    let mut nonce: i64 = 0;
+    let mut nonce = 0_i64;
     let mut time_stamp = Local::now().timestamp();
 
     while hash > target {

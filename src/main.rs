@@ -1,21 +1,17 @@
 use command::commands;
+use std::collections::VecDeque;
 
 fn main() {
     println!("Start Rust Chain!");
 
-    let args: Vec<String> = std::env::args().collect();
+    let mut args = std::env::args().collect::<VecDeque<String>>();
+    let _ = args.pop_front();
 
-    let command = match commands::Commands::parse(args.get(1)) {
-        Ok(c) => c,
-        Err(e) => {
-            println!("{}", e);
-            std::process::exit(1);
-        }
-    };
+    let command = commands::Commands::parse(args).unwrap_or_else(|arg| panic!("{}", arg));
 
-    if let Err(e) = command.run() {
-        println!("{}", e);
-    }
+    command
+        .run()
+        .unwrap_or_else(|e| panic!("failed to run. because {}", e));
 
     println!("completed!");
 }
